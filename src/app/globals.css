@@ -2,32 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* Define font-face for Sniglet-ExtraBold */
+@font-face {
+    font-family: 'Sniglet-ExtraBold';
+    src: url('../../public/fonts/Sniglet-ExtraBold.ttf') format('truetype'); /* Use 'truetype' instead of 'ttf' */
+    font-weight: 800;
+    font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* Define font-face for Sniglet-Regular */
+@font-face {
+    font-family: 'Sniglet-Regular';
+    src: url('../../public/fonts/Sniglet-Regular.ttf') format('truetype'); /* Use 'truetype' instead of 'ttf' */
+    font-weight: 400; /* Adjust the font weight if Sniglet-Regular is not extrabold */
+    font-style: normal;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.sniglet-regular {
+    font-family: "Sniglet-Regular", system-ui; /* Use the correct font-family name */
+    font-weight: 400; /* Use the correct font weight for regular */
+    font-style: normal;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.sniglet-extrabold {
+    font-family: "Sniglet-ExtraBold", system-ui; /* Use the correct font-family name */
+    font-weight: 800;
+    font-style: normal;
 }
