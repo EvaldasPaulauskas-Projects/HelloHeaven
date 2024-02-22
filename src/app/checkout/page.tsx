@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import ProductItem from "../components/ProductItem/ProductItem";
 import Link from "next/link";
+import Loader from "../components/Loader/Loader";
 
 const handleSubmit = async (orderSchema) => {
   try {
@@ -27,6 +28,7 @@ const handleSubmit = async (orderSchema) => {
 export default function CheckoutPage({ updateCartData }) {
   const [cartData, setCartData] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false); // Added loading state
   const router = useRouter();
 
   useEffect(() => {
@@ -53,31 +55,48 @@ export default function CheckoutPage({ updateCartData }) {
     updateCartData(updatedCartData);
   };
 
-
   const totalAmount = cartData.reduce((total, item) => total + item.price * item.quantity, 0);
   const orderCompleted = false;
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     if (cartData.length === 0) {
       setErrorMessage("Error: Cart is empty. Please add items to your cart before placing an order.");
       return;
     }
-
+  
     const inputs = ["email", "firstName", "lastName", "city", "addressLine1", "zipCode"];
     const orderSchema = inputs.reduce((schema, inputId) => {
       const input = document.getElementById(inputId);
       schema[inputId] = input.value;
       return schema;
     }, {});
-
+  
     orderSchema.cartData = cartData;
     orderSchema.orderCompleted = orderCompleted;
-
+  
     if (inputs.every(inputId => document.getElementById(inputId).checkValidity())) {
-      console.log("Order Details:", orderSchema);
-      handleSubmit(orderSchema);
-      sessionStorage.clear();
-      router.push("/checkout/orderCompleted");
+      setLoading(true);
+      try {
+        // Lock scrolling
+        document.body.style.overflow = 'hidden';
+  
+        document.documentElement.scrollTop = 0;
+        window.scrollTo(0, 0);
+        console.log("Order Details:", orderSchema);
+        await handleSubmit(orderSchema);
+        sessionStorage.clear();
+        
+        // Add a 3-second delay before navigating to the order complete page
+        setTimeout(() => {
+          // Unlock scrolling
+          document.body.style.overflow = '';
+          router.push("/checkout/orderCompleted");
+          setLoading(false);
+        }, 3000);
+      } catch (error) {
+        console.error("Error placing order:", error);
+        setErrorMessage("Error placing the order. Please try again.");
+      }
     } else {
       inputs.forEach(inputId => {
         const validationMessage = document.getElementById(`${inputId}-validation-message`);
@@ -88,6 +107,11 @@ export default function CheckoutPage({ updateCartData }) {
 
   return (
     <div className="sniglet-regular">
+      {loading ? (
+        <div className=" h-screen py-40">
+          <Loader />
+        </div>
+      ) : ""}
       <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
         <Link href="/shop-all" className="flex items-center gap-2">
           <span className="text-2xl font-black">◀</span>
@@ -205,7 +229,9 @@ export default function CheckoutPage({ updateCartData }) {
           {errorMessage && (
             <div className="mt-4 mb-4 text-red-600 text-sm">{errorMessage}</div>
           )}
-          <button onClick={handlePlaceOrder} className="mt-4 mb-8 w-full rounded-md bg-neutral-700 px-6 py-3 font-medium text-white">Place Order</button>
+          <button onClick={handlePlaceOrder} className="mt-4 mb-8 w-full rounded-md bg-neutral-700 px-6 py-3 font-medium text-white">
+            Place order
+          </button>
         </div>
       </div>
     </div>
