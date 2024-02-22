@@ -61,7 +61,7 @@ export default function CheckoutPage({ updateCartData })  {
   const orderCompleted = false;
 
   const handlePlaceOrder = () => {
-    const inputs = ["email", "first-name", "last-name", "city", "address-line-1", "zip-code"];
+    const inputs = ["email", "firstName", "lastName", "city", "addressLine1", "zipCode"];
     const orderSchema = inputs.reduce((schema, inputId) => {
       const input = document.getElementById(inputId);
       schema[inputId] = input.value;
@@ -127,30 +127,30 @@ export default function CheckoutPage({ updateCartData })  {
               />
               <span id="email-validation-message" className="text-red-600"></span>
             </div>
-            <label htmlFor="first-name" className="mt-4 mb-2 block text-sm font-medium">
+            <label htmlFor="firstName" className="mt-4 mb-2 block text-sm font-medium">
               First Name
             </label>
             <input
               required  
               type="text"
-              id="first-name"
-              name="first-name"
+              id="firstName"
+              name="firstName"
               className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
               placeholder="Your first name"
             />
-            <span id="first-name-validation-message" className="text-red-600"></span>
-            <label htmlFor="last-name" className="mt-4 mb-2 block text-sm font-medium">
+            <span id="firstName-validation-message" className="text-red-600"></span>
+            <label htmlFor="lastName" className="mt-4 mb-2 block text-sm font-medium">
               Last Name
             </label>
             <input
               required
               type="text"
-              id="last-name"
-              name="last-name"
+              id="lastName"
+              name="lastName"
               className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
               placeholder="Your last name"
             />
-            <span id="last-name-validation-message" className="text-red-600"></span>
+            <span id="lastName-validation-message" className="text-red-600"></span>
             <label htmlFor="city" className="mt-4 mb-2 block text-sm font-medium">
               City
             </label>
@@ -163,30 +163,30 @@ export default function CheckoutPage({ updateCartData })  {
               placeholder="Your city"
             />
             <span id="city-validation-message" className="text-red-600"></span>
-            <label htmlFor="address-line-1" className="mt-4 mb-2 block text-sm font-medium">
+            <label htmlFor="addressLine1" className="mt-4 mb-2 block text-sm font-medium">
               Address Line 1
             </label>
             <input
               required
               type="text"
-              id="address-line-1"
-              name="address-line-1"
+              id="addressLine1"
+              name="addressLine1"
               className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
               placeholder="Your address line 1"
             />
-            <span id="address-line-1-validation-message" className="text-red-600"></span>
-            <label htmlFor="zip-code" className="mt-4 mb-2 block text-sm font-medium ">
+            <span id="addressLine1-validation-message" className="text-red-600"></span>
+            <label htmlFor="zipCode" className="mt-4 mb-2 block text-sm font-medium ">
               Zip Code
             </label>
             <input
               required
               type="text"
-              id="zip-code"
-              name="zip-code"
+              id="zipCode"
+              name="zipCode"
               className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
               placeholder="Your zip code"
             />
-            <span id="zip-code-validation-message" className="text-red-600"></span>
+            <span id="zipCode-validation-message" className="text-red-600"></span>
           </div>
           <div className="mt-6 border-t border-b py-2 sniglet-extrabold flex flex-col gap-4">
             <div className="flex items-center justify-between text-neutral-700">
