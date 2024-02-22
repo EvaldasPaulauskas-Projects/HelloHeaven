@@ -30,7 +30,7 @@ export default function Navbar() {
     return (
         <div>
             {
-                isCheckoutPage === "/checkout" ? "" : (
+                isCheckoutPage === "/checkout" || isCheckoutPage === "/checkout/orderCompleted" ? "" : (
                     <nav className='fixed top-0 left-0 right-0 p-8 w-full h-24 bg-white shadow-lg z-50'>
                     <ul className='flex items-center text-center justify-center gap-10 text-3xl uppercase sniglet-extrabold text-[#c5bce9]'>
                         

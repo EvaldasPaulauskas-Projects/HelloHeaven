@@ -1,12 +1,11 @@
-'use client'
-import { useEffect, useRef, useState } from "react";
+'use client';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import ProductItem from "../components/ProductItem/ProductItem";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 const handleSubmit = async (orderSchema) => {
   try {
-    // Save product information in MongoDB
     const response = await fetch('/api/mongo', {
       method: 'POST',
       headers: {
@@ -17,7 +16,6 @@ const handleSubmit = async (orderSchema) => {
 
     if (response.ok) {
       console.log('Order added to the mongoDB');
-      // Additional actions after successful submission
     } else {
       console.log('MongoDB error');
     }
@@ -26,10 +24,9 @@ const handleSubmit = async (orderSchema) => {
   }
 };
 
-
-export default function CheckoutPage({ updateCartData })  {
+export default function CheckoutPage({ updateCartData }) {
   const [cartData, setCartData] = useState([]);
-
+  const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -56,11 +53,16 @@ export default function CheckoutPage({ updateCartData })  {
     updateCartData(updatedCartData);
   };
 
-  const totalAmount = cartData.reduce((total, item) => total + item.price * item.quantity, 0);
 
+  const totalAmount = cartData.reduce((total, item) => total + item.price * item.quantity, 0);
   const orderCompleted = false;
 
   const handlePlaceOrder = () => {
+    if (cartData.length === 0) {
+      setErrorMessage("Error: Cart is empty. Please add items to your cart before placing an order.");
+      return;
+    }
+
     const inputs = ["email", "firstName", "lastName", "city", "addressLine1", "zipCode"];
     const orderSchema = inputs.reduce((schema, inputId) => {
       const input = document.getElementById(inputId);
@@ -68,16 +70,14 @@ export default function CheckoutPage({ updateCartData })  {
       return schema;
     }, {});
 
-    // Include cartData in orderSchema
     orderSchema.cartData = cartData;
     orderSchema.orderCompleted = orderCompleted;
 
     if (inputs.every(inputId => document.getElementById(inputId).checkValidity())) {
       console.log("Order Details:", orderSchema);
-      // Send the orderSchema to the mongoDB
-      handleSubmit(orderSchema); // Call the handleSubmit function here with orderSchema
+      handleSubmit(orderSchema);
       sessionStorage.clear();
-      router.push("/");
+      router.push("/checkout/orderCompleted");
     } else {
       inputs.forEach(inputId => {
         const validationMessage = document.getElementById(`${inputId}-validation-message`);
@@ -90,8 +90,8 @@ export default function CheckoutPage({ updateCartData })  {
     <div className="sniglet-regular">
       <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
         <Link href="/shop-all" className="flex items-center gap-2">
-          <span className=" text-2xl font-black">◀</span>
-          <span className=" underline underline-offset-2">Continue Shopping</span>
+          <span className="text-2xl font-black">◀</span>
+          <span className="underline underline-offset-2">Continue Shopping</span>
         </Link>
         <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
           <div className="relative"></div>
@@ -202,9 +202,12 @@ export default function CheckoutPage({ updateCartData })  {
             <p className="text-2xl font-medium sniglet-extrabold">Total</p>
             <p className="text-2xl font-semibold sniglet-extrabold">{totalAmount.toFixed(2)} $</p>
           </div>
+          {errorMessage && (
+            <div className="mt-4 mb-4 text-red-600 text-sm">{errorMessage}</div>
+          )}
           <button onClick={handlePlaceOrder} className="mt-4 mb-8 w-full rounded-md bg-neutral-700 px-6 py-3 font-medium text-white">Place Order</button>
         </div>
       </div>
     </div>
   );
-};
+}
