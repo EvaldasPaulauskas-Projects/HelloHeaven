@@ -95,9 +95,9 @@ export default function Navbar() {
                 onClick={() => openCart()}
                 className='w-52 flex flex-col ml-auto md:-mr-0 -mr-32 sniglet-regular text-base text-gray-800'
               >
-                <Image alt='/' className='ml-[auto] mr-32 -my-10 h-10 w-10' src={bagIcon} />
+                <Image alt='/' className='ml-[auto] mr-32 -my-10 h-14 w-16' src={bagIcon} />
                 {/* Hide on tablet or mobile */}
-                <span className='hidden md:inline-block lg:inline-block xl:inline-block ml-24'>
+                <span className='hidden md:inline-block lg:inline-block xl:inline-block ml-24 -my-4'>
                   Shopping Cart : <span className='font-bold'>{cartData.reduce((total, item) => total + item.quantity, 0)} Items</span>
                 </span>
               </button>
