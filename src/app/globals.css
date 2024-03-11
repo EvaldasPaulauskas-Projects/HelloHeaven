@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+    overflow-x: hidden;
+}
 /* Define font-face for Sniglet-ExtraBold */
 @font-face {
     font-family: 'Sniglet-ExtraBold';

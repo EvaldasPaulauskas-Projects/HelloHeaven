@@ -112,7 +112,7 @@ export default function CheckoutPage({ updateCartData }) {
           <Loader />
         </div>
       ) : ""}
-      <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
+      <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32 ml-12">
         <Link href="/shop-all" className="flex items-center gap-2">
           <span className="text-2xl font-black">◀</span>
           <span className="underline underline-offset-2">Continue Shopping</span>
@@ -122,7 +122,7 @@ export default function CheckoutPage({ updateCartData }) {
         </div>
       </div>
       <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
-        <div className="px-5 pt-8 pl-1 -pr-32 border mr-1 -ml-20">
+        <div className="px-5 pt-8 pl-1 -pr-32 border mr-1 ml-4 md:ml-20">
           <p className="text-xl font-medium">Order Summary</p>
           <p className="text-gray-400">Check your items. And select a suitable shipping method.</p>
           <ul className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6 flex flex-col">
@@ -232,6 +232,8 @@ export default function CheckoutPage({ updateCartData }) {
           <button onClick={handlePlaceOrder} className="mt-4 mb-8 w-full rounded-md bg-neutral-700 px-6 py-3 font-medium text-white">
             Place order
           </button>
+
+          <div className=" pb-80"></div>
         </div>
       </div>
     </div>

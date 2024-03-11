@@ -159,22 +159,30 @@ export default function ProductDetails({ params }) {
           </div>
         </div>
       ) : (
-        <Loader />
+        <div className=" ml-0 md:ml-80"> 
+          <Loader />
+        </div>
       )}
-  
-      <div className="w-full my-32 sniglet-regular">
-        <h1 className="text-4xl flex items-center justify-center gap-8 font-black">
-          <div className="w-52 h-1 bg-[#ffcedd]"></div>
-          You May Also Like
-          <div className="w-52 h-1 bg-[#ffcedd]"></div>
-        </h1>
-  
-        <ul className="flex flex-wrap flex-row gap-8 justify-center items-centerr my-16">
-          {productsLike.map((productLike, index) => (
-            <ProductCards key={index} product={productLike} />
-          ))}
-        </ul>
-      </div>
+
+      {
+        product ? (
+          <div className="w-full my-32 sniglet-regular">
+          <h1 className="text-4xl flex items-center justify-center gap-8 font-black">
+            <div className="w-52 h-1 bg-[#ffcedd]"></div>
+            You May Also Like
+            <div className="w-52 h-1 bg-[#ffcedd]"></div>
+          </h1>
+    
+          <ul className="flex flex-wrap flex-row gap-8 justify-center items-centerr my-16">
+            {productsLike.map((productLike, index) => (
+              <ProductCards key={index} product={productLike} />
+            ))}
+          </ul>
+        </div>
+        ) : (
+          <div> </div>
+        )
+      }
     </div>
   );
 }

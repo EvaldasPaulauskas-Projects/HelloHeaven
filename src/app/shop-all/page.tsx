@@ -68,9 +68,9 @@ export default function ShopAll() {
   };
 
   return (
-    <div className="w-full my-24 sniglet-regular">
+    <div className="w-full my-24 sniglet-regular md:flex gap-20">
 
-      <div className="my-8 ml-12 w-80 ">
+      <div className="my-8 ml-10 md:ml-76 w-80 ">
         <h1 className="w-full h-20 text-2xl font-bold py-4 uppercase">Shop All</h1>
         <h1 className="border-b-2 border-[#b5b0b1] sniglet-extrabold font-black uppercase pb-2">Filter By:</h1>
         <label className={`sniglet-regular ${loading ? "pointer-events-none " : "pointer-events-auto"}`}>
@@ -149,11 +149,12 @@ export default function ShopAll() {
         </label>
       </div>
       {loading ? (
-        <div className="-my-[38rem] ml-36 pb-96">
+        <div className="">
           <Loader />
         </div>
       ) : (
-        <div className="w-[68rem] ml-auto -my-[28rem] flex flex-row flex-wrap gap-6 pb-96">
+        
+        <div className="md:w-[64rem] flex flex-row flex-wrap ml-12 md:ml-0">
           {filteredProducts.length === 0 ? (
             <NotFound />
           ) : (
@@ -162,6 +163,7 @@ export default function ShopAll() {
             ))
           )}
         </div>
+        
       )}
     </div>
   );
