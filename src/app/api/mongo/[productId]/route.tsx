@@ -9,8 +9,8 @@ export async function GET(request,productId) {
         const productIdValue = parsedJson.params.productId;
 
         // Connect to mongoDB
-        const uri = "mongodb+srv://mongo:mongoDBpsswsd@helloheavendb.0xoa3i8.mongodb.net/?retryWrites=true&w=majority";
-        const client = new MongoClient(uri);
+        const url = process.env.MONGODB_URI;
+        const client = new MongoClient(url);
 
         try{
             // Go to collection

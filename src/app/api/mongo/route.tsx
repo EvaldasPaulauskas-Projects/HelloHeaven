@@ -2,10 +2,11 @@ import { MongoClient } from "mongodb";
 import { NextResponse } from "next/server";
 
 // GETTING ALL DATA FROM MONGODB
+const url = process.env.MONGODB_URI;
+
 export async function GET() {
-    const uri = "mongodb+srv://mongo:mongoDBpsswsd@helloheavendb.0xoa3i8.mongodb.net/?retryWrites=true&w=majority";
   
-    const client = new MongoClient(uri);
+    const client = new MongoClient(url);
     try {
       const database = client.db("products");
       const values = database.collection("data");
@@ -21,10 +22,8 @@ export async function GET() {
 // SENDING DATA TO MONGODB
 export async function POST(request) {
   let body = await request.json();
-  
-  const uri ="mongodb+srv://mongo:mongoDBpsswsd@helloheavendb.0xoa3i8.mongodb.net/?retryWrites=true&w=majority";
 
-  const client = new MongoClient(uri);
+  const client = new MongoClient(url);
 
   try {
     const database = client.db("orders");
