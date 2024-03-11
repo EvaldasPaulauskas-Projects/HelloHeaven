@@ -3,10 +3,12 @@ import Link from "next/link";
 import ProductCards from "./components/ProductCard/ProductCard";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import homeBackground from "../../public/imgs/Home-Background.png"
+import backgroundHomeImage from "../../public/imgs/backgroundImageHome.webp";
+
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+
 
   useEffect(() => {
       async function fetchData() {
@@ -26,7 +28,18 @@ export default function Home() {
   return (
     <div>
       {/* Load from server */}
-      <div className="w-full h-[28rem] my-28 flex items-center justify-center">
+      <div className="relative w-full h-[28rem] my-28 flex items-center justify-center cursor-default">
+        <Image
+        src={backgroundHomeImage}
+        alt="Background Image"
+        layout="fill"
+        objectFit="cover"
+        objectPosition="center"
+        quality={100}
+        />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <h1 className="text-red-500 drop-shadow-[0_8px_4px_rgba(0,0,0,1)] sniglet-extrabold uppercase text-6xl max-w-[36rem] text-center">one stop shop for all your hello kitty needs!</h1>
+        </div>
       </div>
  
 
