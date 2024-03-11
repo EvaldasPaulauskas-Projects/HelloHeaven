@@ -2,6 +2,8 @@
 import Link from "next/link";
 import ProductCards from "./components/ProductCard/ProductCard";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import homeBackground from "../../public/imgs/Home-Background.png"
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -24,7 +26,9 @@ export default function Home() {
   return (
     <div>
       {/* Load from server */}
-      <div className="w-full h-[28rem] bg-red-400 my-28"></div>
+      <div className="w-full h-[28rem] my-28 flex items-center justify-center">
+      </div>
+ 
 
       <div className="w-full text-center sniglet-regular -my-4">
 
@@ -42,7 +46,7 @@ export default function Home() {
           
           <li>
             <Link
-            className="p-3 px-16 sniglet-regular text-[#f57ca0] border-[#f57ca0] border border-x-1 hover:text-xl transition-all duration-300 hover:bg-[#f57ca0] hover:text-white hover:border-0 hover:border-opacity-0 capitalize bg-transparent shadow-lg shadow-[#ffcedd]"
+            className="p-3 px-16 md:px-36 sniglet-regular text-[#f57ca0] border-[#f57ca0] border border-x-1 hover:text-xl transition-all duration-300 hover:bg-[#f57ca0] hover:text-white hover:border-0 hover:border-opacity-0 capitalize bg-transparent shadow-lg shadow-[#ffcedd]"
             href="/shop-all">
               View All
             </Link>
