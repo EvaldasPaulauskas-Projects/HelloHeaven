@@ -7,6 +7,15 @@ const nextConfig = {
       // !! WARN !!
       ignoreBuildErrors: true,
     },
+
+    async rewrites() {
+      return [
+        {
+          source: '/:path*',
+          destination: '/',
+        },
+      ];
+    }
   };
   
   export default nextConfig;
